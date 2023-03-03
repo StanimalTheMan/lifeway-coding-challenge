@@ -13,6 +13,7 @@ const App = () => {
   */
   const prevCharacterName = usePrevious(characterName);
   const [characterProfileData, setCharacterProfileData] = useState({});
+  const [isNoDataFound, setIsNoDataFound] = useState(false);
 
   useEffect(() => {
     if (characterName === "") return;
@@ -23,7 +24,14 @@ const App = () => {
       fetch(`https://swapi.dev/api/people/?search=${characterName}`)
         .then((res) => res.json())
         .then((data) => {
-          setCharacterProfileData(data.results[0]);
+          console.log("Ddd", data);
+          if (data.results.length == 0) {
+            // e.g. user types something like "Fff" which is not the name of a Star Wars character
+            setIsNoDataFound(true);
+          } else {
+            setIsNoDataFound(false);
+            setCharacterProfileData(data.results[0]);
+          }
         });
     }, 2000);
 
@@ -34,12 +42,13 @@ const App = () => {
   const onHandleChange = useCallback((e) => {
     setCharacterName(e.target.value);
   }, []);
-
+  console.log(isNoDataFound);
   return (
     <>
       <h1 className="header">Search for your favorite Starwars Character</h1>
       <Searchbar name={characterName} onChange={onHandleChange} />
-      <Profile data={characterProfileData} />
+      {isNoDataFound && <h2>No character found...Search again...</h2>}
+      {!isNoDataFound && <Profile data={characterProfileData} />}
     </>
   );
 };
