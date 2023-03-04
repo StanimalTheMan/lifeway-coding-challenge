@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+import "./Profile.css";
+
 const Profile = () => {
   const { state: data } = useLocation();
   const [characterSpecies, setCharacterSpecies] = useState([]);
@@ -33,7 +35,7 @@ const Profile = () => {
   }, [data.films, data.species, data.starships]);
 
   return (
-    <>
+    <div className="container">
       <Link to="/">Home</Link>
       <h2>
         <em>{data.name}</em>
@@ -81,7 +83,7 @@ const Profile = () => {
           </ul>
         )}
       </section>
-    </>
+    </div>
   );
 };
 

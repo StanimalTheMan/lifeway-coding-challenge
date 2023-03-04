@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const CharacterProfiles = ({ characterProfiles }) => {
   return (
-    <>
+    <div style={{ textAlign: "center" }}>
       <h1>Matching Characters</h1>
       <ul>
         {characterProfiles.map((characterProfile) => {
@@ -20,7 +20,7 @@ const CharacterProfiles = ({ characterProfiles }) => {
           );
         })}
       </ul>
-    </>
+    </div>
   );
 };
 
