@@ -9,6 +9,8 @@ const Profile = () => {
   const [characterStarshipsFlown, setCharacterStarshipsFlown] = useState([]);
 
   useEffect(() => {
+    // not sure how to do all of the api requests concurrently
+    // unable to differentiate film responses from species and starships if I don't do as below?
     const speciesPromises = data.species.map((speciesUrl) =>
       fetch(speciesUrl).then((res) => res.json())
     );
